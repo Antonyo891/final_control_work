@@ -14,12 +14,19 @@
 два файла Домашние животные (заполнив файл собаками, кошками,
 хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и
 ослы), а затем объединить их. Просмотреть содержимое созданного файла.
-Переименовать файл, дав ему новое имя (Друзья человека).
-2. Создать директорию, переместить файл туда.
-3. Подключить дополнительный репозиторий MySQL. Установить любой пакет
-из этого репозитория.
-4. Установить и удалить deb-пакет с помощью dpkg.
-5. Выложить историю команд в терминале ubuntu
+Переименовать файл, дав ему новое имя (Друзья человека). <br> 
+ *:cat > Pets.txt <br> :Cats, Dogs, Hamsters <br>
+:cat > Pack_Animals.txt <br> :horses, camels, donkey <br> :cat Pack_Animals.txt Pets.txt > Humans_Friends.txt <br> :cat Humans_Friends.txt <br>
+horses, camels, donkey, cats, dogs, hamsters <br>
+:mv Humans_Friends.txt Peoples_friends.txt* <br>
+
+2. Создать директорию, переместить файл туда.<br>
+*:mkdir Files <br> :mv Peoples_friends.txt /home/antonyo891/final_work/Files/*<br>
+
+3. Подключить дополнительный репозиторий MySQL. Установить любой пакет из этого репозитория. <br> *: wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb <br>: sudo dpkg -i mysql-apt-config_0.8.29-1_all.deb <br>: sudo apt install mysql-server -y*  <br>
+
+4. Установить и удалить deb-пакет с помощью dpkg.<br> *: wget http://archive.ubuntu.com/ubuntu/pool/universe/n/nginx/nginx-full_1.18.0-6ubuntu14.4_amd64.deb <br> : sudo dpkg -i nginx-full_1.18.0-6ubuntu14.4_amd64.deb <br> : sudo dpkg -r nginx-full* <br>
+5. Выложить историю команд в терминале ubuntu<br> ![history](Task_1-5.md). 
 6. Нарисовать диаграмму, в которой есть класс родительский класс, домашние
 животные и вьючные животные, в составы которых в случае домашних
 животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
