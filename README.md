@@ -26,7 +26,7 @@ horses, camels, donkey, cats, dogs, hamsters <br>
 3. Подключить дополнительный репозиторий MySQL. Установить любой пакет из этого репозитория. <br> *: wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb <br>: sudo dpkg -i mysql-apt-config_0.8.29-1_all.deb <br>: sudo apt install mysql-server -y*  <br>
 
 4. Установить и удалить deb-пакет с помощью dpkg.<br> *: wget http://archive.ubuntu.com/ubuntu/pool/universe/n/nginx/nginx-full_1.18.0-6ubuntu14.4_amd64.deb <br> : sudo dpkg -i nginx-full_1.18.0-6ubuntu14.4_amd64.deb <br> : sudo dpkg -r nginx-full* <br>
-5. Выложить историю команд в терминале ubuntu<br> ![history](Task_1-5.md). 
+5. Выложить историю команд в терминале ubuntu<br> [History](https://github.com/Antonyo891/final_control_work/blob/master/Files/Task_1-5.md "History"). 
 6. Нарисовать диаграмму, в которой есть класс родительский класс, домашние
 животные и вьючные животные, в составы которых в случае домашних
 животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
