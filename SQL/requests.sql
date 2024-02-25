@@ -148,14 +148,3 @@ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 type_id INT(1),
 id_lower INT  #id from table Pets or Pack Animals 
 );
-
-CREATE TABLE IF NOT EXISTS Animals
-(
-id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-id_family INT(2) NOT NULL,
-id_type INT(2) NOT NULL,
-id_command INT(3) DEFAULT NULL,
-id_add_command_1 INT(3) DEFAULT NULL,
-id_add_command_2 INT(3) DEFAULT NULL,
-birthdate DATE
-);

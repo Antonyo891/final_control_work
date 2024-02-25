@@ -225,9 +225,18 @@ UNION SELECT * FROM Donkeys; <br>
  ) as month FROM donkeys 
  WHERE (
  select PERIOD_DIFF(DATE_FORMAT(NOW(),'%y%m'),DATE_FORMAT(birthdate,'%y%m'))) 
- between 12 and 36; <br>
-12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
-прошлую принадлежность к старым таблицам.
+ between 12 and 36; <br> 
+12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на 
+прошлую принадлежность к старым таблицам. <br> INSERT INTO pets (id_family,lower_id)
+ SELECT id_family,id FROM cats
+ UNION SELECT id_family,id FROM dogs
+ UNION SELECT id_family,id FROM hamsters; <br> 
+ INSERT INTO pack_animals (id_family,lower_id)
+ SELECT id_family,id FROM horses
+ UNION SELECT id_family,id FROM donkeys; <br> 
+ INSERT INTO all_animals (type_id,id_lower)
+ SELECT type_id, id FROM pets
+ UNION SELECT type_id, id FROM pack_animals; <br>
 13. Создать класс с Инкапсуляцией методов и наследованием по диаграмме.
 14. Написать программу, имитирующую работу реестра домашних животных.
 В программе должен быть реализован следующий функционал:
