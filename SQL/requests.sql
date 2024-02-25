@@ -1,0 +1,169 @@
+CREATE DATABASE IF NOT EXISTS Humans_friends;
+USE Humans_friends;
+
+CREATE TABLE IF NOT EXISTS Animals_type
+(
+id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(25) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Family_animals
+(
+id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+family VARCHAR(25) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Commands
+(
+id INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+command VARCHAR(25) NOT NULL UNIQUE
+);
+
+INSERT INTO Animals_type (type) VALUES ('pets'),
+('pack_animals');
+
+INSERT INTO Family_animals (family) VALUES 
+('cat'),('hamster'),('dog'),
+('horse'),('camel'),('donkey');
+
+INSERT INTO Commands (command) VALUES 
+('voice'),('run'),('jump'),
+('sit'),('go_home'),('to_eat');
+
+CREATE TABLE IF NOT EXISTS Cats
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 1,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id)
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Hamsters
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 2,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id) 
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Dogs
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 3,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id) 
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Horses
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 4,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id) 
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Camels
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 5,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id) 
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Donkeys
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(3) DEFAULT 6,
+id_command INT(3) DEFAULT NULL,
+name VARCHAR(25) NOT NULL,
+birthdate DATE,
+FOREIGN KEY (id_family)
+REFERENCES Family_animals(id) 
+ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_command)
+REFERENCES Commands(id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Pets
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_id INT(1) DEFAULT 1,
+id_family INT(3),
+lower_id INT NOT NULL,
+CONSTRAINT anymals_type
+FOREIGN KEY (type_id)
+REFERENCES Animals_type(id) 
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Pack_animals
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_id INT(1) DEFAULT 2,
+id_family INT(3),
+lower_id INT NOT NULL,
+CONSTRAINT anymals_type
+FOREIGN KEY (type_id)
+REFERENCES Animals_type(id) 
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS All_animals
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_id INT(1),
+id_lower INT  #id from table Pets or Pack Animals 
+);
+
+INSERT INTO Cats (id_command,name,birthdate) value
+(1,'Barsik','2020-01-01');
+
+Select * FROM Cats;
+
+
+CREATE TABLE IF NOT EXISTS Animals
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_family INT(2) NOT NULL,
+id_type INT(2) NOT NULL,
+id_command INT(3) DEFAULT NULL,
+id_add_command_1 INT(3) DEFAULT NULL,
+id_add_command_2 INT(3) DEFAULT NULL,
+birthdate DATE
+);
