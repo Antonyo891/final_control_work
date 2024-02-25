@@ -1,0 +1,6 @@
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM camels
+WHERE id is not null;
+
+SELECT * FROM Horses
+UNION SELECT * FROM Donkeys;
