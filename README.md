@@ -135,7 +135,6 @@ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 type_id INT(1) DEFAULT 1,
 id_family INT(3),
 lower_id INT NOT NULL,
-CONSTRAINT anymals_type
 FOREIGN KEY (type_id)
 REFERENCES Animals_type(id) 
 ON UPDATE CASCADE ON DELETE CASCADE
@@ -145,7 +144,6 @@ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 type_id INT(1) DEFAULT 2,
 id_family INT(3),
 lower_id INT NOT NULL,
-CONSTRAINT anymals_type
 FOREIGN KEY (type_id)
 REFERENCES Animals_type(id) 
 ON UPDATE CASCADE ON DELETE CASCADE
@@ -156,7 +154,6 @@ type_id INT(1),
 id_lower INT  #id from table Pets or Pack Animals 
 ); <br>
 9. Заполнить низкоуровневые таблицы именами(животных), командами <br>
-
 которые они выполняют и датами рождения
 10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой
 питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
