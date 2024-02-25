@@ -149,12 +149,6 @@ type_id INT(1),
 id_lower INT  #id from table Pets or Pack Animals 
 );
 
-INSERT INTO Cats (id_command,name,birthdate) value
-(1,'Barsik','2020-01-01');
-
-Select * FROM Cats;
-
-
 CREATE TABLE IF NOT EXISTS Animals
 (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
