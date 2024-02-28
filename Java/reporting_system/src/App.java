@@ -1,28 +1,25 @@
+
+
 import java.util.ArrayList;
 
-import Counter.Counter;
-import Exception.CloseCounterException;
-import Exception.PetNameException;
-import model.Cat;
-import model.Dog;
+import javax.swing.text.View;
+
+import Controller.PetControllerConsole;
 import model.Pet;
+import view.ConsoleView;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        try (Counter counter = new Counter(1))
-        {
-            counter.add();
-            System.out.println(counter.getCounter());
-            counter.add();
-            counter.add();
-            System.out.println(counter.getCounter());
-            counter.close();
-            counter.add();
-        }
-        catch (CloseCounterException e){
-            System.out.println(e.getMessage());
-        }
-
+       PetControllerConsole controller = new PetControllerConsole();
+       ConsoleView view = new ConsoleView();
+       controller.CreatePet();
+       controller.ViewPets();
+       ArrayList<Pet> pets = new ArrayList<>();
+       pets = controller.GetPets();
+       for (Pet pet : pets) {
+        view.Set(pet.getFamily()+ " " + pet);
+       } 
+    
     }
 }

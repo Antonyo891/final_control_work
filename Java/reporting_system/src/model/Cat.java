@@ -6,6 +6,7 @@ public class Cat extends Pet {
 
     private Cat(int id, String name, ArrayList<String> commands, String birthdate) {
         super(id, name, commands, birthdate);
+        super.family = "Cat";
     }
 
     @Override

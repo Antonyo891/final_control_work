@@ -6,7 +6,7 @@ public class Hamster extends Pet {
 
     protected Hamster(int id, String name, ArrayList<String> commands, String birthdate) {
         super(id, name, commands, birthdate);
-        //TODO Auto-generated constructor stub
+        super.family="Hamster";
     }
 
 

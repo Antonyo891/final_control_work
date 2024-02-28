@@ -16,6 +16,7 @@ public class Dog extends Pet {
 
     private Dog(int id, String name, ArrayList<String> commands, String birthdate) {
         super(id, name, commands, birthdate);
+        super.family = "Dog";
     }
 
 

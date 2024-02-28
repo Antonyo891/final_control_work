@@ -7,7 +7,7 @@ import model.Pet;
 
 public class Pet {
     protected int id;
-    protected String name, birthdate, command;
+    protected String name, birthdate, command, family;
     protected ArrayList<String> commands;
 
     protected Pet(int id, String name, ArrayList<String> commands, String birthdate) {
@@ -15,11 +15,16 @@ public class Pet {
         this.name = name;
         this.commands = commands;
         this.birthdate = birthdate;
+        this.family = "Pet";
     }
 
     public static Pet create(int id, String name, ArrayList<String> commands, String birthdate) throws PetNameException {
         if (name == null) throw new PetNameException("Wrong pet name: ",name);
         return new Pet(id, name, commands, birthdate);
+    }
+
+    public String getFamily(){
+        return family;
     }
     
     public int getId() {
