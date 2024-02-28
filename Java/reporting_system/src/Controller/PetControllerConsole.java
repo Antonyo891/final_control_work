@@ -6,6 +6,7 @@ import java.util.Arrays;
 import Counter.Counter;
 import Exception.CloseCounterException;
 import Exception.PetException;
+import Exception.PetNameException;
 import model.Cat;
 import model.Dog;
 import model.Hamster;
@@ -15,22 +16,36 @@ import view.View;
 
 public class PetControllerConsole implements PetController {
     private Pet pet;
-    private Counter count = new Counter(0);
+    private Counter count;
     private Integer choise, id;
     private ArrayList<Pet> pets;
     private ArrayList<Integer> parser,idList;
-    private ArrayList<Integer> maxDayMonth = new ArrayList<>(Arrays.asList(1,3,5,7,8,10,12));
-    private ArrayList<Integer> minDayMonth = new ArrayList<>(Arrays.asList(4,6,9,11));
+    private ArrayList<Integer> maxDayMonth;
+    private ArrayList<Integer> minDayMonth;
     private ArrayList<String> birthDate,commands;
-    private String name,dateOfBirth,command;
+    private String name,dateOfBirth,command,newCommand;
     private View view;
-    private String addPetsMenu = "1. Add Cat \n" +
+    private String addPetsMenu;
+
+
+    public PetControllerConsole(View view) {
+        this.count = new Counter(4);
+        this.view = view;
+        this.id = null;
+        this.pets = new ArrayList<>();
+        this.maxDayMonth = new ArrayList<>(Arrays.asList(1,3,5,7,8,10,12));
+        this.minDayMonth = new ArrayList<>(Arrays.asList(4,6,9,11));
+        this.addPetsMenu = "1. Add Cat \n" +
             "\r\n" + "2. Add Dog\n" + 
             "\r\n" + "3. Add Hamster \n" + 
-            "\r\n" +  "4. Save and exit \n";
+            "\r\n" +  "4. Back \n";
+    }
+    
+
+
     @Override
     public void CreatePet() {
-        commands = new ArrayList<>();
+        this.commands = new ArrayList<>();
         view = new ConsoleView();
         view.Set(addPetsMenu);
         view.Set("Enter number of required action");
@@ -39,7 +54,8 @@ public class PetControllerConsole implements PetController {
         {      
         try {
         choise = Integer.parseInt(view.Get());
-        if ((choise>0)&&(choise<5)) work =false;
+        if ((choise>0)&&(choise<4)) work =false;
+        else if (choise==4) return;
         else view.Set("Incorrect data: "+choise+". Enter  (1 .. 4)");
         } catch (RuntimeException e) {
            view.Set("Incorrect data: "+choise+". Enter  (1 .. 4)");
@@ -57,7 +73,6 @@ public class PetControllerConsole implements PetController {
             view.Set("Enter correct command");
             command  = view.Get();
         }
-        commands = new ArrayList<>();
         commands.add(command);
         birthDate = new ArrayList<>();
         parser = new ArrayList<>();
@@ -137,6 +152,7 @@ public class PetControllerConsole implements PetController {
                 } catch (PetException e) {
                     view.Set(e.getMessage());
                 }
+                view.Set("Cat - " + name + "add to the nursery");
                 break;
             case 2:
                 try {
@@ -145,6 +161,7 @@ public class PetControllerConsole implements PetController {
                 } catch (PetException e) {
                     view.Set(e.getMessage());
                 }
+                view.Set("Dog - " + name + "add to the nursery");
                 break;
                 case 3:
                 try {
@@ -153,32 +170,45 @@ public class PetControllerConsole implements PetController {
                 } catch (PetException e) {
                     view.Set(e.getMessage());
                 }
-                break;
-            default:
+                view.Set("Hamster - " + name + "add to the nursery");
                 break;
         }
     }
 
+    
+
     @Override
     public void AddCommand() {
-        view.Set(pets.toString());
+        newCommand = null;
+        this.id = null;
+        for (Pet tempPet : pets) {
+        view.Set(tempPet.toString());    
+        }
         view.Set("Enter Pets Id to ADD NEW COMMAND");
+        idList = new ArrayList<>();
         for (Pet i : pets) {
-            idList = new ArrayList<>();
             idList.add(i.getId());
         }
         boolean work = true;
         while (work) 
         {
         try {
-            id = Integer.parseInt(view.Get());
-            if (idList.contains(id)) work =false;
+            this.id = Integer.parseInt(view.Get());
+            if (idList.contains(this.id)) work =false;
             else view.Set("Pets whith id - " + id + " not in List");
         } catch (RuntimeException e) {
             view.Set("Enter valid Id");
         }
         }
-        throw new UnsupportedOperationException("Unimplemented method 'AddCommand'");
+        for (int i=0;i<pets.size();i++) {
+          if (this.id == pets.get(i).getId()){
+            view.Set(pets.get(i).getName() + " can " + pets.get(i).getCommands());
+            view.Set("Enter new command");
+            newCommand = view.Get();
+            pets.get(i).addCommands(newCommand);
+            view.Set("Pet " + pets.get(i).getName()+ " learned a new command" + newCommand);
+          }    
+        }
     }
 
     public void ViewPets(){
@@ -189,4 +219,45 @@ public class PetControllerConsole implements PetController {
         return this.pets;
     }
 
-}
+    public void GetCommands(){
+        String output = "";
+        for (int i=0;i<pets.size();i++) {
+            output = output + "\n" + pets.get(i).getFamily() + " " + pets.get(i).getName() + " can -" +
+            pets.get(i).getCommands(); 
+        }
+        view.Set(output);
+    }
+
+    public void AddPets(ArrayList<Pet> pets){
+        for (int i=0;i<pets.size();i++) {
+            this.AddPet(pets.get(i));
+        }
+    }
+
+    @Override
+    public void AddPet(Pet petAdd) {
+        Integer idAdd = 0;
+        try {
+            idAdd = count.add();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        if (petAdd.getFamily().equals("Cat")) {
+            try {
+            this.pets.add(Cat.create(idAdd, petAdd.getName(), petAdd.getCommands(), petAdd.getBirthdate()));    
+            } catch (PetNameException e) {
+                view.Set(e.getMessage());
+        }} else if (petAdd.getFamily().equals("Dog")) {
+            try {
+            this.pets.add(Dog.create(idAdd, petAdd.getName(), petAdd.getCommands(), petAdd.getBirthdate()));    
+            } catch (PetNameException e) {
+                view.Set(e.getMessage());
+            }            
+        }  else if (petAdd.getFamily().equals("Hamster")) {
+            try {
+            this.pets.add(Hamster.create(idAdd, petAdd.getName(), petAdd.getCommands(), petAdd.getBirthdate()));    
+            } catch (PetNameException e) {
+                view.Set(e.getMessage());
+            }
+    }
+}}

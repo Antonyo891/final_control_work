@@ -66,7 +66,7 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "{" +
+        return family + " {" +
             " id='" + getId() + "'" +
             ", name='" + getName() + "'" +
             ", birthdate='" + getBirthdate() + "'" +
