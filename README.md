@@ -238,7 +238,7 @@ UNION SELECT * FROM Donkeys; <br>
  SELECT type_id, id FROM pets
  UNION SELECT type_id, id FROM pack_animals; <br>
 13. Создать класс с Инкапсуляцией методов и наследованием по диаграмме.<br> [link](https://github.com/Antonyo891/final_control_work/tree/master/Java/reporting_system/src/model)
-14. Написать программу, имитирующую работу реестра домашних животных.
+14. Написать программу, имитирующую работу реестра домашних животных. <br> [main](https://github.com/Antonyo891/final_control_work/blob/master/Java/reporting_system/src/Main.java) <br>
 В программе должен быть реализован следующий функционал:
     * завести новое животное.
     * определять животное в правильный класс
